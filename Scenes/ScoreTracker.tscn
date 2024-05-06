@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6xb8nhlqtuhf"]
+[gd_scene load_steps=9 format=3 uid="uid://b6xb8nhlqtuhf"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/GameUI.gd" id="1_3k7kl"]
 [ext_resource type="LabelSettings" uid="uid://1cnb4418rr7" path="res://Art/Fonts/pixelized_label_large.tres" id="2_ygwdu"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_lsl3u"]
+[ext_resource type="Texture2D" uid="uid://cqd0lljmo6pq4" path="res://Art/Buttons/transparentDarkX.png" id="4_h66ba"]
+[ext_resource type="Texture2D" uid="uid://d8td4406303v" path="res://Art/Buttons/transparentDarkY.png" id="5_hnn48"]
+[ext_resource type="Texture2D" uid="uid://d3wlo2sbdvwp6" path="res://Art/Buttons/transparentDarkA.png" id="6_6jnat"]
+[ext_resource type="Texture2D" uid="uid://dv1w1s77uywrm" path="res://Art/Buttons/transparentDarkB.png" id="7_40vfx"]
+[ext_resource type="Texture2D" uid="uid://x5tr8vc3exix" path="res://Art/Buttons/transparentDarkR.png" id="8_nej48"]
 
 [node name="Score_tracker_layer" type="CanvasLayer"]
 layer = 2
@@ -24,3 +30,84 @@ offset_top = 9.0
 offset_right = 573.0
 offset_bottom = 35.0
 label_settings = ExtResource("2_ygwdu")
+
+[node name="OnscreenControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OnscreenControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Virtual Joystick" parent="OnscreenControls/HBoxContainer" instance=ExtResource("3_lsl3u")]
+layout_mode = 2
+size_flags_horizontal = 3
+joystick_mode = 2
+visibility_mode = 2
+action_left = "MoveLeft"
+action_right = "MoveRight"
+action_up = "MoveUp"
+action_down = "MoveDown"
+
+[node name="Control" type="Control" parent="OnscreenControls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonsControl" type="Control" parent="OnscreenControls/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ButtonX" type="TouchScreenButton" parent="OnscreenControls/HBoxContainer/Control/ButtonsControl"]
+position = Vector2(-170, -110)
+texture_normal = ExtResource("4_h66ba")
+action = "Dash"
+visibility_mode = 1
+
+[node name="ButtonY" type="TouchScreenButton" parent="OnscreenControls/HBoxContainer/Control/ButtonsControl"]
+position = Vector2(-110, -170)
+texture_normal = ExtResource("5_hnn48")
+action = "Punch"
+visibility_mode = 1
+
+[node name="ButtonA" type="TouchScreenButton" parent="OnscreenControls/HBoxContainer/Control/ButtonsControl"]
+position = Vector2(-110, -50)
+texture_normal = ExtResource("6_6jnat")
+action = "Enter"
+visibility_mode = 1
+
+[node name="ButtonB" type="TouchScreenButton" parent="OnscreenControls/HBoxContainer/Control/ButtonsControl"]
+position = Vector2(-50, -110)
+texture_normal = ExtResource("7_40vfx")
+action = "Kick"
+visibility_mode = 1
+
+[node name="RControl" type="Control" parent="OnscreenControls/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="ButtonR" type="TouchScreenButton" parent="OnscreenControls/HBoxContainer/Control/RControl"]
+position = Vector2(-50, 10)
+texture_normal = ExtResource("8_nej48")
+action = "Restart"
+visibility_mode = 1
